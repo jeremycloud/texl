@@ -23,7 +23,7 @@ function toTree(exp) {
 
 describe('Evaluator', function() {
 	it('should evaluate an arithmetic expression', function() {
-		var e = new Evaluator(grammar);
+		const e = new Evaluator(grammar);
 		return e.eval(toTree('(2 + 3) * 4')).should.become(20);
 	});
 	it('should evaluate a string concat', function() {
