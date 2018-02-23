@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Development]
 ### Changed
 - Format all code with Prettier and ESLint
+- Remove Gulp and dist versions
+- Drop support for old versions of Node. Only Node 8 and 9 are supported.
 
 ## [v1.1.6]
 ### Changed
