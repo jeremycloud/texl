@@ -9,27 +9,27 @@ shared:
     docker:
       - image: circleci/node:9
 
+  restore-yarn-cache: &restore-yarn-cache
+    restore_cache:
+      key: yarn-cache-{{ checksum "yarn.lock" }}
+
   build: &build
     steps:
       - checkout
+      - *restore-yarn-cache
       - run:
-          name: Update NPM
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: NPM Install
-          command: npm install
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: yarn-cache-{{ checksum "yarn.lock" }}
           paths:
+            - ~/.cache/yarn
             - node_modules
 
   test: &test
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      - *restore-yarn-cache
       - run:
           name: Test
           command: npm run test
@@ -37,8 +37,7 @@ shared:
   lint: &lint
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      - *restore-yarn-cache
       - run:
           name: Test
           command: npm run lint
