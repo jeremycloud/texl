@@ -3,9 +3,11 @@
  * Copyright (c) 2015 TechnologyAdvice
  */
 
-var should = require("chai").should(),
+var chai = require("chai"),
   Lexer = require("../lib/Lexer"),
   grammar = require("../lib/grammar").elements;
+
+chai.should();
 
 var inst;
 

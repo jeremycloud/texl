@@ -9,7 +9,7 @@
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec --recursive test",
     "prepublish": "gulp",
-    "lint": "prettier --list-different 'lib/**' 'test/**' gulpfile.js"
+    "lint": "eslint lib test gulpfile.js .eslintrc.js --ignore-pattern '!.eslintrc.js'"
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,9 @@
     "vinyl-transform": "=1.0.0"
   },
   "dependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "prettier": "^1.10.2"
   }
 }
