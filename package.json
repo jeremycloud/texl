@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec --recursive test",
+    "test": "mocha -R spec --recursive test",
     "lint": "eslint lib test .eslintrc.js --ignore-pattern '!.eslintrc.js'"
   },
   "repository": {
