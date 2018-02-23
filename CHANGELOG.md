@@ -1,8 +1,20 @@
-# Jexl Change Log
+# mozjexl Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Development
-Nothing yet!
+## [Development]
+### Changed
+- Format all code with Prettier and ESLint
+
+## [v1.1.6]
+### Changed
+- Add comments with octothorpes (`#`)
+
+## [v1.1.5]
+### Changed
+- Allow arbitrary whitespace, including newlines, in expressions.
+
+### Fixed
+- Handle undefined and filter expressions better.
 
 ## [v1.1.4]
 ### Fixed
@@ -79,12 +91,14 @@ literals.
 - Initial release
 
 [Development]: https://github.com/TechnologyAdvice/Jexl/compare/1.1.4...HEAD
-[v1.1.4]: https://github.com/TechnologyAdvice/Jexl/compare/1.1.3...1.1.4
-[v1.1.3]: https://github.com/TechnologyAdvice/Jexl/compare/1.1.2...1.1.3
-[v1.1.2]: https://github.com/TechnologyAdvice/Jexl/compare/1.1.1...1.1.2
-[v1.1.1]: https://github.com/TechnologyAdvice/Jexl/compare/1.1.0...1.1.1
-[v1.1.0]: https://github.com/TechnologyAdvice/Jexl/compare/1.0.2...1.1.0
-[v1.0.2]: https://github.com/TechnologyAdvice/Jexl/compare/1.0.1...1.0.2
-[v1.0.1]: https://github.com/TechnologyAdvice/Jexl/compare/1.0.0...1.0.1
-[v1.0.0]: https://github.com/TechnologyAdvice/Jexl/compare/0.2.0...1.0.0
-[v0.2.0]: https://github.com/TechnologyAdvice/Jexl/compare/0.1.0...0.2.0
+[v1.1.6]: https://github.com/mozilla/mozjexl/compare/1.1.4...1.1.6
+[v1.1.5]: https://github.com/mozilla/mozjexl/compare/1.1.4...1.1.5
+[v1.1.4]: https://github.com/mozilla/mozjexl/compare/1.1.3...1.1.4
+[v1.1.3]: https://github.com/mozilla/mozjexl/compare/1.1.2...1.1.3
+[v1.1.2]: https://github.com/mozilla/mozjexl/compare/1.1.1...1.1.2
+[v1.1.1]: https://github.com/mozilla/mozjexl/compare/1.1.0...1.1.1
+[v1.1.0]: https://github.com/mozilla/mozjexl/compare/1.0.2...1.1.0
+[v1.0.2]: https://github.com/mozilla/mozjexl/compare/1.0.1...1.0.2
+[v1.0.1]: https://github.com/mozilla/mozjexl/compare/1.0.0...1.0.1
+[v1.0.0]: https://github.com/mozilla/mozjexl/compare/0.2.0...1.0.0
+[v0.2.0]: https://github.com/mozilla/mozjexl/compare/0.1.0...0.2.0
