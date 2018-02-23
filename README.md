@@ -1,14 +1,8 @@
-mozJexl is a fork of Jexl for use at Mozilla, specifically as a part
-of SHIELD and Normandy.
+# Mozjexl [![CircleCI](https://img.shields.io/circleci/project/github/mozilla/mozjexl.svg)](https://github.com/mozilla/mozjexl)
 
----
-
-<a href="http://promisesaplus.com/">
-    <img src="https://promises-aplus.github.io/promises-spec/assets/logo-small.png"
-         align="right" valign="top" alt="Promises/A+ logo" />
-</a>
-# Jexl [![Build Status](https://travis-ci.org/TechnologyAdvice/Jexl.svg?branch=master)](https://travis-ci.org/TechnologyAdvice/Jexl) [![Code Climate](https://codeclimate.com/github/TechnologyAdvice/Jexl/badges/gpa.svg)](https://codeclimate.com/github/TechnologyAdvice/Jexl) [![Test Coverage](https://codeclimate.com/github/TechnologyAdvice/Jexl/badges/coverage.svg)](https://codeclimate.com/github/TechnologyAdvice/Jexl)
-Javascript Expression Language: Powerful context-based expression parser and evaluator
+Javascript Expression Language: Powerful context-based expression
+parser and evaluator Mozjexl is a fork of Jexl for use at Mozilla,
+specifically as a part of SHIELD and Normandy.
 
 ## Quick start
 Use it with promises or callbacks:
@@ -25,83 +19,72 @@ var context = {
 };
 
 // Filter an array
-jexl.eval('assoc[.first == "Lana"].last', context).then(function(res) {
+mozjexl.eval('assoc[.first == "Lana"].last', context).then(function(res) {
     console.log(res); // Output: Kane
 });
 
 // Do math
-jexl.eval('age * (3 - 1)', context, function(err, res) {
+mozjexl.eval('age * (3 - 1)', context, function(err, res) {
     console.log(res); // Output: 72
 });
 
 // Concatenate
-jexl.eval('name.first + " " + name["la" + "st"]', context).then(function(res) {
+mozjexl.eval('name.first + " " + name["la" + "st"]', context).then(function(res) {
     console.log(res); // Output: Sterling Archer
 });
 
 // Compound
-jexl.eval('assoc[.last == "Figgis"].first == "Cyril" && assoc[.last == "Poovey"].first == "Pam"', context)
+mozjexl.eval('assoc[.last == "Figgis"].first == "Cyril" && assoc[.last == "Poovey"].first == "Pam"', context)
     .then(function(res) {
         console.log(res); // Output: true
     });
 
 // Use array indexes
-jexl.eval('assoc[1]', context, function(err, res) {
+mozjexl.eval('assoc[1]', context, function(err, res) {
     console.log(res.first + ' ' + res.last); // Output: Cyril Figgis
 });
 
 // Use conditional logic
-jexl.eval('age > 62 ? "retired" : "working"', context).then(function(res) {
+mozjexl.eval('age > 62 ? "retired" : "working"', context).then(function(res) {
     console.log(res); // Output: working
 });
 
 // Transform
-jexl.addTransform('upper', function(val) {
+mozjexl.addTransform('upper', function(val) {
     return val.toUpperCase();
 });
-jexl.eval('"duchess"|upper + " " + name.last|upper', context).then(function(res) {
+mozjexl.eval('"duchess"|upper + " " + name.last|upper', context).then(function(res) {
     console.log(res); // Output: DUCHESS ARCHER
 });
 
 // Transform asynchronously, with arguments
-jexl.addTransform('getStat', function(val, stat) {
+mozjexl.addTransform('getStat', function(val, stat) {
     return dbSelectByLastName(val, stat); // Returns a promise
 });
-jexl.eval('name.last|getStat("weight")', context, function(err, res) {
+mozjexl.eval('name.last|getStat("weight")', context, function(err, res) {
     if (err) console.log('Database Error', err.stack);
     else console.log(res); // Output: 184
 });
 
 // Add your own (a)synchronous operators
 // Here's a case-insensitive string equality
-jexl.addBinaryOp('_=', 20, function(left, right) {
+mozjexl.addBinaryOp('_=', 20, function(left, right) {
     return left.toLowerCase() === right.toLowerCase();
 });
-jexl.eval('"Guest" _= "gUeSt"').then(function(val) {
+mozjexl.eval('"Guest" _= "gUeSt"').then(function(val) {
     console.log(res); // Output: true
 });
 ```
 
 ## Installation
-Jexl requires an environment that supports the
-[Promise/A+](https://promisesaplus.com/) specification as standardized in ES6.
-Node.js version 0.12.0 and up is great right out of the box (no --harmony flag
-necessary), as well as the latest versions of many browsers. To support older
-browsers, just include a Promise library such as
-[Bluebird](https://github.com/petkaantonov/bluebird).
 
-For Node.js, type this in your project folder:
+For Node.js or Web projects, type this in your project folder:
 
-    npm install jexl --save
+    yarn add mozjexl
 
-For the frontend, drop `dist/jexl.min.js` into your project and include it on
-your page with:
+Access Mozjexl the same way, backend or front:
 
-    <script src="path/to/jexl.min.js"></script>
-
-Access Jexl the same way, backend or front:
-
-    var jexl = require('Jexl');
+    import mozjexl from 'mozjexl';
 
 ## All the details
 ### Unary Operators
@@ -236,17 +219,17 @@ Example context:
 
 ### Transforms
 
-The power of Jexl is in transforming data, synchronously or asynchronously.
+The power of Mozjexl is in transforming data, synchronously or asynchronously.
 Transform functions take one or more arguments: The value to be transformed,
 followed by anything else passed to it in the expression. They must return
 either the transformed value, or a Promise that resolves with the transformed
-value. Add them with `jexl.addTransform(name, function)`.
+value. Add them with `mozjexl.addTransform(name, function)`.
 
 ```javascript
-jexl.addTransform('split', function(val, char) {
+mozjexl.addTransform('split', function(val, char) {
     return val.split(char);
 });
-jexl.addTransform('lower', function(val) {
+mozjexl.addTransform('lower', function(val) {
     return val.toLowerCase();
 });
 ```
@@ -257,7 +240,7 @@ jexl.addTransform('lower', function(val) {
 | "password==guest"&#124;split('=' + '=')    | ['password', 'guest'] |
 
 #### Advanced Transforms
-Using Transforms, Jexl can support additional string formats like embedded
+Using Transforms, Mozjexl can support additional string formats like embedded
 JSON, YAML, XML, and more.  The following, with the help of the
 [xml2json](https://github.com/buglabs/node-xml2json) module, allows XML to be
 traversed just as easily as plain javascript objects:
@@ -265,7 +248,7 @@ traversed just as easily as plain javascript objects:
 ```javascript
 var xml2json = require('xml2json');
 
-jexl.addTransform('xml', function(val) {
+mozjexl.addTransform('xml', function(val) {
     return xml2json.toJson(val, {object: true});
 });
 
@@ -285,7 +268,7 @@ var context = {
 
 var expr = 'xmlDoc|xml.Employees.Employee[.LastName == "Figgis"].FirstName';
 
-jexl.eval(expr, context).then(function(res) {
+mozjexl.eval(expr, context).then(function(res) {
     console.log(res); // Output: Cyril
 });
 ```
@@ -294,17 +277,17 @@ jexl.eval(expr, context).then(function(res) {
 
 Variable contexts are straightforward Javascript objects that can be accessed
 in the expression, but they have a hidden feature: they can include a Promise
-object, and when that property is used, Jexl will wait for the Promise to
+object, and when that property is used, Mozjexl will wait for the Promise to
 resolve and use that value!
 
 ### API
 
-#### jexl.Jexl
+#### mozjexl.Jexl
 A reference to the Jexl constructor. To maintain separate instances of Jexl
 with each maintaining its own set of transforms, simply re-instantiate with
-`new jexl.Jexl()`.
+`new mozjexl.Jexl()`.
 
-#### jexl.addBinaryOp(_{string} operator_, _{number} precedence_, _{function} fn_)
+#### mozjexl.addBinaryOp(_{string} operator_, _{number} precedence_, _{function} fn_)
 Adds a binary operator to the Jexl instance. A binary operator is one that
 considers the values on both its left and right, such as "+" or "==", in order
 to calculate a result. The precedence determines the operator's position in the
@@ -313,40 +296,39 @@ existing operators). The provided function will be called with two arguments:
 a left value and a right value. It should return either the resulting value,
 or a Promise that resolves to the resulting value.
 
-#### jexl.addUnaryOp(_{string} operator_, _{function} fn_)
+#### mozjexl.addUnaryOp(_{string} operator_, _{function} fn_)
 Adds a unary operator to the Jexl instance. A unary operator is one that
 considers only the value on its right, such as "!", in order to calculate a
 result. The provided function will be called with one argument: the value to
 the operator's right. It should return either the resulting value, or a Promise
 that resolves to the resulting value.
 
-#### jexl.addTransform(_{string} name_, _{function} transform_)
+#### mozjexl.addTransform(_{string} name_, _{function} transform_)
 Adds a transform function to this Jexl instance.  See the **Transforms**
 section above for information on the structure of a transform function.
 
-#### jexl.addTransforms(_{{}} map_)
+#### mozjexl.addTransforms(_{{}} map_)
 Adds multiple transforms from a supplied map of transform name to transform
 function.
 
-#### jexl.getTransform(_{string} name_)
+#### mozjexl.getTransform(_{string} name_)
 **Returns `{function|undefined}`.** Gets a previously set transform function,
 or `undefined` if no function of that name exists.
 
-#### jexl.eval(_{string} expression_, _{{}} [context]_, _{function} [callback]_)
+#### mozjexl.eval(_{string} expression_, _{{}} [context]_, _{function} [callback]_)
 **Returns `{Promise<*>}`.** Evaluates an expression.  The context map and
 callback function are optional. If a callback is specified, it will be called
 with the standard signature of `{Error}` first argument, and the expression's
 result in the second argument.  Note that if a callback function is supplied,
 the returned Promise will already have a `.catch()` attached to it.
 
-#### jexl.removeOp(_{string} operator_)
+#### mozjexl.removeOp(_{string} operator_)
 Removes a binary or unary operator from the Jexl instance. For example, "^" can
 be passed to eliminate the "power of" operator.
 
 ## License
-Jexl is licensed under the MIT license. Please see `LICENSE.txt` for full
+Mozjexl is licensed under the MIT license. Please see `LICENSE.txt` for full
 details.
 
 ## Credits
-Jexl was designed and created at
-[TechnologyAdvice](http://technologyadvice.com).
+Jexl was designed and created at [TechnologyAdvice](http://technologyadvice.com).
