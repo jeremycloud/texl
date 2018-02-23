@@ -7,9 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec --recursive test",
-    "prepublish": "gulp",
-    "lint": "eslint lib test gulpfile.js .eslintrc.js --ignore-pattern '!.eslintrc.js'"
+    "test": "mocha -R spec --recursive test",
+    "lint": "eslint lib test .eslintrc.js --ignore-pattern '!.eslintrc.js'"
   },
   "repository": {
     "type": "git",
@@ -36,20 +35,9 @@
   },
   "homepage": "https://github.com/mozilla/mozjexl",
   "devDependencies": {
-    "browserify": "=9.0.3",
     "chai": "^2.0.0",
     "chai-as-promised": "^4.2.0",
-    "gulp": "=3.8.11",
-    "gulp-istanbul": "^0.6.0",
-    "gulp-istanbul-enforcer": "^1.0.3",
-    "gulp-mocha": "^2.0.0",
-    "gulp-rename": "=1.2.0",
-    "gulp-uglify": "=1.1.0",
-    "istanbul": "^0.3.8",
     "mocha": "^2.1.0",
-    "vinyl-transform": "=1.0.0"
-  },
-  "dependencies": {
     "eslint": "^4.18.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
