@@ -25,7 +25,10 @@
     "filter",
     "selector"
   ],
-  "author": "Tom Shawver <tom@frosteddesign.com>",
+  "authors": [
+    "Tom Shawver <tom@frosteddesign.com>",
+    "Michael Cooper <mcooper@mozilla.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mozilla/mozjexl/issues"
