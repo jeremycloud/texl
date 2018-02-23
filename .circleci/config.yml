@@ -1,8 +1,15 @@
 version: 2
-jobs:
-  build:
+
+shared:
+  node8: &node8
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/node:9
+
+  node9: &node9
+    docker:
+      - image: circleci/node:9
+
+  build: &build
     steps:
       - checkout
       - run:
@@ -18,9 +25,7 @@ jobs:
           paths:
             - node_modules
 
-  test:
-    docker:
-      - image: circleci/node:4.8.2
+  test: &test
     steps:
       - checkout
       - restore_cache:
@@ -29,9 +34,7 @@ jobs:
           name: Test
           command: npm run test
 
-  lint:
-    docker:
-      - image: circleci/node:4.8.2
+  lint: &lint
     steps:
       - checkout
       - restore_cache:
@@ -40,14 +43,51 @@ jobs:
           name: Test
           command: npm run lint
 
+jobs:
+  build-node8:
+    <<: *build
+    <<: *node8
+
+  test-node8:
+    <<: *test
+    <<: *node8
+
+  lint-node8:
+    <<: *lint
+    <<: *node8
+
+  build-node9:
+    <<: *build
+    <<: *node9
+
+  test-node9:
+    <<: *test
+    <<: *node9
+
+  lint-node9:
+    <<: *lint
+    <<: *node9
+
 workflows:
   version: 2
-  build_test_lint:
+  pr:
     jobs:
-      - build
-      - test:
+      - build-node8
+
+      - test-node8:
           requires:
-            - build
-      - lint:
+            - build-node8
+
+      - lint-node8:
           requires:
-            - build
+            - build-node8
+
+      - build-node9
+
+      - lint-node9:
+          requires:
+            - build-node9
+
+      - test-node9:
+          requires:
+            - build-node9
