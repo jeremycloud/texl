@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec --recursive test",
-    "prepublish": "gulp"
+    "prepublish": "gulp",
+    "lint": "prettier --list-different 'lib/**' 'test/**' gulpfile.js"
   },
   "repository": {
     "type": "git",
@@ -47,5 +48,8 @@
     "istanbul": "^0.3.8",
     "mocha": "^2.1.0",
     "vinyl-transform": "=1.0.0"
+  },
+  "dependencies": {
+    "prettier": "^1.10.2"
   }
 }
