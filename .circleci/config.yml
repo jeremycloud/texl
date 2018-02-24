@@ -32,7 +32,7 @@ shared:
       - *restore-yarn-cache
       - run:
           name: Test
-          command: npm run test
+          command: yarn test
 
   lint: &lint
     steps:
@@ -40,7 +40,7 @@ shared:
       - *restore-yarn-cache
       - run:
           name: Test
-          command: npm run lint
+          command: yarn lint
 
 jobs:
   build-node8:

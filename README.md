@@ -326,6 +326,21 @@ the returned Promise will already have a `.catch()` attached to it.
 Removes a binary or unary operator from the Jexl instance. For example, "^" can
 be passed to eliminate the "power of" operator.
 
+## Hacking
+
+```shell
+$ yarn install
+$ yarn test
+```
+
+### Precommit hook
+
+Mozjexl provides a config for
+[Therapist](http://therapist.readthedocs.io/en/latest/overview.html). Install
+it with Pip, and then run `therapist install` in this repo to set it
+up. It will automatically format your Javascript with Prettier, and
+run ESLint checks before committing your code.
+
 ## License
 Mozjexl is licensed under the MIT license. Please see `LICENSE.txt` for full
 details.
