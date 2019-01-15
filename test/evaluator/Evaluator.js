@@ -147,6 +147,11 @@ describe("Evaluator", function() {
       .eval(toTree('["foo", 1+2]'))
       .should.eventually.deep.equal(["foo", 3]);
   });
+  it("should allow properties on empty arrays", function() {
+    var context = { foo: {} },
+      e = new Evaluator(grammar, null, context);
+    return e.eval(toTree("[].baz")).should.become(undefined);
+  });
   it('should apply the "in" operator to strings', function() {
     var e = new Evaluator(grammar);
     return Promise.all([
