@@ -34,8 +34,20 @@ describe("Lexer", function() {
       elems.should.have.length(1);
       elems[0].should.equal(str);
     });
+    it("should support escaping double-quotes at end of double-quote strings", function() {
+      var str = '"\\""',
+        elems = inst.getElements(str);
+      elems.should.have.length(1);
+      elems[0].should.equal(str);
+    });
     it("should support escaping single-quotes", function() {
       var str = "'f\\'oo'",
+        elems = inst.getElements(str);
+      elems.should.have.length(1);
+      elems[0].should.equal(str);
+    });
+    it("should support escaping single-quotes at end of single-quote strings", function() {
+      var str = "'\\''",
         elems = inst.getElements(str);
       elems.should.have.length(1);
       elems[0].should.equal(str);
