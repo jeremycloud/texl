@@ -341,6 +341,14 @@ it with Pip, and then run `therapist install` in this repo to set it
 up. It will automatically format your Javascript with Prettier, and
 run ESLint checks before committing your code.
 
+## Building a JSM for use in mozilla-central ##
+```shell
+$ yarn build
+```
+
+The result will be in `vendor/mozjexl.jsm`.  This is for use in `mozilla-central/toolkit`, so it is not
+minified as it will be compressed in the omnijar file.
+
 ## License
 Mozjexl is licensed under the MIT license. Please see `LICENSE.txt` for full
 details.
