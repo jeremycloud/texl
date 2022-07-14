@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "vendor/"),
     filename: "[name].jsm",
-    library: "[name].jsm",
+    library: "[name]",
     libraryTarget: "this"
   },
   plugins: [
