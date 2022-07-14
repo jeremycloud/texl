@@ -1,4 +1,4 @@
-/* eslint-disable */this["mozjexl.jsm"] =
+/* eslint-disable */this["mozjexl"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
