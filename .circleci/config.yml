@@ -1,13 +1,9 @@
 version: 2
 
 shared:
-  node8: &node8
+  node12: &node12
     docker:
-      - image: circleci/node:9
-
-  node9: &node9
-    docker:
-      - image: circleci/node:9
+      - image: cimg/node:12.22
 
   restore-yarn-cache: &restore-yarn-cache
     restore_cache:
@@ -43,50 +39,28 @@ shared:
           command: yarn lint
 
 jobs:
-  build-node8:
+  build-node12:
     <<: *build
-    <<: *node8
+    <<: *node12
 
-  test-node8:
+  test-node12:
     <<: *test
-    <<: *node8
+    <<: *node12
 
-  lint-node8:
+  lint-node12:
     <<: *lint
-    <<: *node8
-
-  build-node9:
-    <<: *build
-    <<: *node9
-
-  test-node9:
-    <<: *test
-    <<: *node9
-
-  lint-node9:
-    <<: *lint
-    <<: *node9
+    <<: *node12
 
 workflows:
   version: 2
   pr:
     jobs:
-      - build-node8
+      - build-node12
 
-      - test-node8:
+      - lint-node12:
           requires:
-            - build-node8
+            - build-node12
 
-      - lint-node8:
+      - test-node12:
           requires:
-            - build-node8
-
-      - build-node9
-
-      - lint-node9:
-          requires:
-            - build-node9
-
-      - test-node9:
-          requires:
-            - build-node9
+            - build-node12
